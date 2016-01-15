@@ -9,6 +9,9 @@ public class Ores
 		Ventana ventana = new Ventana();
 		ventana.setVisible(true);
 
+		Thread hilo = new Thread(ventana);
+		hilo.start();
+		
 	}
 
 }
