@@ -1,9 +1,10 @@
-import java.swing.*;
+import javax.swing.*;
 
-class Ores
+public class Ores
 {
 
 	public static void main(String [] mago){
 		System.out.println("Hola");
 	}
+	
 }
