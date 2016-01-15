@@ -2,6 +2,7 @@ package interfaz;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.*;
 
 
 public class Ventana extends JFrame implements Runnable
@@ -13,10 +14,12 @@ public class Ventana extends JFrame implements Runnable
 	Graphics gBuffer = null;
 	int lasX = 680;
 	int lasY = 480;
+	Vector<Box> boxes = new Vector<Box>();
+	int nivelPiso = 400;
+	int limite = lasX/2;
 
 	public Ventana()
 	{
-		panel = new Papel();
 		setTitle("Ores y que?");
 		setSize(lasX, lasY);
 		setLocationRelativeTo(null);
@@ -25,7 +28,6 @@ public class Ventana extends JFrame implements Runnable
 
 	public void run()
 	{
-		// TODO: inciamos el juego
 		try
 		{
 			while(true)
@@ -35,7 +37,8 @@ public class Ventana extends JFrame implements Runnable
 				Thread.sleep(100);
 			}
 
-		}catch(InterruptedException e)
+		}
+		catch(InterruptedException e)
 		{
 			System.out.println("Interruncción del juego");
 		}
@@ -58,20 +61,20 @@ public class Ventana extends JFrame implements Runnable
 			img = createImage(lasX, lasY);
 			gBuffer = img.getGraphics();
 		}
-		// intentemos mejorar esto
 		gBuffer.setColor(getBackground());
 		gBuffer.fillRect(0,0, lasX,lasY);
-
-		// dibujamos la cosa
-		gBuffer.fillOval(this.x, this.y, 60,10);
 		
+		// mejoramos graficos
 		Graphics2D g2d = (Graphics2D) gBuffer;
-
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
 		g2d.setColor(Color.RED);
+
 		gBuffer.fillOval(this.x, this.y, 50, 50);
+
+		this.dibujarPlataforma(gBuffer);
+		this.dibujarBoxes(gBuffer);
 
 		
 		g.drawImage(img, 0, 0, null);
@@ -81,4 +84,20 @@ public class Ventana extends JFrame implements Runnable
 		//g = box.getGraphicsObject();
 	}
 
+	public void dibujarPlataforma(Graphics g)
+	{
+		g.setColor(Color.GRAY);
+		g.fillRect(limite, nivelPiso, 280, 50);
+	}
+
+	public void dibujarBoxes(Graphics g)
+	{
+		for (int i=0; i<7; i++)
+		{
+			for (int j=0; j<10; j++)
+			{
+				boxes.add(new Box(g, i*20, j*20));
+			}
+		}
+	}
 }

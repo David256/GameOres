@@ -1,57 +1,67 @@
 package interfaz;
 
 import java.awt.*;
+import java.util.*;
 
 
 public class Box
 {
 	Graphics g;
 	Color color;
-	int posX;
-	int posY;
+	int x;
+	int y;
 
-	public Box(Graphics g, Color color)
+	public Box(Graphics g, int x, int y)
 	{
 		this.g = g;
 		this.color = color;
-	}
-
-	public Box(Graphics g, Color color, int x, int y))
-	{
-		this.g = g;
-		this.color = color;
-		this.posX = x;
-		this.posY = y;
+		this.x = x;
+		this.y = y;
+		/* podemos escojer entre los siguientes colores:
+		- BLUE
+		- DARK_GRAY
+		- GREEN
+		- RED
+		- YELLOW
+		*/
+		Random m = new Random();
+		int i = (int) (m.nextDouble()*5);
+		Color elColor[] = {Color.BLUE, Color.DARK_GRAY, Color.GREEN, Color.RED, Color.YELLOW};
+		this.color = elColor[i];
+		preparar();
 	}
 
 	public void setPosition(int x, int y)
 	{
-		this.posX = x;
-		this.posY = y;
+		this.x = x;
+		this.y = y;
 	}
 
-	public void setPosX(int posx)
+	public void setx(int x)
 	{
-		this.posX = posx;
+		this.x = x;
 	}
 
-	public void setPosY(int posy)
+	public void sety(int y)
 	{
-		this.posY = posy;
+		this.y = y;
 	}
 
-	public int getPosX(){ return this.posX; }
-	public int getPosY(){ return this.posY; }
+	public int getx(){ return this.x; }
+	public int gety(){ return this.y; }
+
+	public String getNick(){
+		return "x" + this.x + "y" + this.y;
+	}
 
 	public void preparar()
 	{
-		g.setColor(color);
-		g.drawLine(0,0,50,50);
+		g.setColor(this.color);
+		g.fillRect(this.x,this.y,20,20);
 	}
 
 	public Graphics getGraphicsObject()
 	{
-		System.out.println("Retornamos objecto Graphics");
 		return this.g;
 	}
 
