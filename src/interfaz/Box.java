@@ -10,6 +10,7 @@ public class Box
 	private int posicion;
 	private int altitud;
 	private int limite;
+	private boolean encima = true;
 
 	public Box(int posicion, int altitud)
 	{
@@ -46,12 +47,26 @@ public class Box
 
 	public void dibujar(Graphics g)
 	{
-		int x = 680 - (20 * this.posicion) - 20;
-		int y = 400 - (20 * this.altitud) - 20;
-		g.setColor(this.color);
-		g.fillRect(x, y, 20, 20);
-		g.setColor(Color.BLACK);
-		g.drawRect(x, y, 20, 20);
+		if (this.encima)
+		{
+			int x = 680 - (20 * this.posicion) - 20;
+			int y = 400 - (20 * this.altitud) - 20;
+			g.setColor(this.color);
+			g.fillRect(x, y, 20, 20);
+			g.setColor(Color.BLACK);
+			g.drawRect(x, y, 20, 20);
+		}
+		else
+		{
+			this.posicion += 1;
+			this.altitud -= 10;
+			int x = 680 - (20 * this.posicion) - 20;
+			int y = 400 - (20 * this.altitud) - 20;
+			g.setColor(this.color);
+			g.fillRect(x, y, 20, 20);
+			g.setColor(Color.BLACK);
+			g.drawRect(x, y, 20, 20);
+		}
 	}
 	public boolean esTuColor(Color koloro)
 	{
@@ -74,6 +89,7 @@ public class Box
 	public void comprobarCaida()
 	{
 		if (this.limite == (680 - (this.posicion*20)))
-			System.out.println("nos caemos : " + this.getNick());
+			this.encima = false;
+
 	}
 }
