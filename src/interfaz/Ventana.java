@@ -7,9 +7,6 @@ import java.util.*;
 
 public class Ventana extends JFrame implements Runnable
 {
-
-	int x = 0;
-	int y = 0;
 	Image img;
 	Graphics gBuffer = null;
 	int lasX = 680;
@@ -17,6 +14,7 @@ public class Ventana extends JFrame implements Runnable
 	Vector<Box> boxes = new Vector<Box>();
 	int nivelPiso = 400;
 	int limite = lasX/2;
+	boolean cubosDentro = false;
 
 	public Ventana()
 	{
@@ -30,11 +28,18 @@ public class Ventana extends JFrame implements Runnable
 	{
 		try
 		{
+			int ciclo = 0;
 			while(true)
 			{
 				calculo();
 				repaint();
 				Thread.sleep(100);
+				ciclo++;
+				if (ciclo > 230)
+				{
+					ciclo = 0;
+					System.out.println("Ciclo off");
+				}
 			}
 
 		}
@@ -47,8 +52,7 @@ public class Ventana extends JFrame implements Runnable
 
 	public void calculo()
 	{
-		this.x += 1;
-		this.y += 1;
+		
 	}
 
 	@Override
@@ -71,33 +75,40 @@ public class Ventana extends JFrame implements Runnable
 
 		g2d.setColor(Color.RED);
 
-		gBuffer.fillOval(this.x, this.y, 50, 50);
-
 		this.dibujarPlataforma(gBuffer);
+		if (!this.cubosDentro){
+			System.out.println("Iniciamos primera vez Box()");
+			this.prepararBoxes();
+			this.cubosDentro = true;
+		}
 		this.dibujarBoxes(gBuffer);
 
 		
 		g.drawImage(img, 0, 0, null);
-		//g.setColor(Color.RED);
-		//g.drawLine(0,0,100,100);
-		//Box box = new Box(g, Color.RED);
-		//g = box.getGraphicsObject();
 	}
 
 	public void dibujarPlataforma(Graphics g)
 	{
 		g.setColor(Color.GRAY);
-		g.fillRect(limite, nivelPiso, 280, 50);
+		g.fillRect(limite, nivelPiso, 340, 50);
+	}
+
+	public void prepararBoxes()
+	{
+		for (int j=0; j<7; j++)
+		{
+			for (int i=0; i<10; i++)
+			{
+				boxes.add(new Box(i,j));
+			}
+		}
 	}
 
 	public void dibujarBoxes(Graphics g)
 	{
-		for (int i=0; i<7; i++)
+		for (int i=0; i<boxes.size(); i++)
 		{
-			for (int j=0; j<10; j++)
-			{
-				boxes.add(new Box(g, i*20, j*20));
-			}
+			((Box) boxes.get(i)).dibujar(g);
 		}
 	}
 }

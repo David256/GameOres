@@ -6,18 +6,16 @@ import java.util.*;
 
 public class Box
 {
-	Graphics g;
-	Color color;
-	int x;
-	int y;
+	private final Color color;
+	private int posicion;
+	private int altitud;
 
-	public Box(Graphics g, int x, int y)
+	public Box(int posicion, int altitud)
 	{
-		this.g = g;
-		this.color = color;
-		this.x = x;
-		this.y = y;
-		/* podemos escojer entre los siguientes colores:
+		this.posicion = posicion;
+		this.altitud = altitud;
+		/*
+		  podemos escojer entre los siguientes colores:
 		- BLUE
 		- DARK_GRAY
 		- GREEN
@@ -28,41 +26,37 @@ public class Box
 		int i = (int) (m.nextDouble()*5);
 		Color elColor[] = {Color.BLUE, Color.DARK_GRAY, Color.GREEN, Color.RED, Color.YELLOW};
 		this.color = elColor[i];
-		preparar();
 	}
 
-	public void setPosition(int x, int y)
+	public void setPosicion(int neoPos)
 	{
-		this.x = x;
-		this.y = y;
+		this.posicion = neoPos;
 	}
-
-	public void setx(int x)
+	public void setAltitud(int neoAlt)
 	{
-		this.x = x;
+		this.altitud = neoAlt;
 	}
-
-	public void sety(int y)
-	{
-		this.y = y;
-	}
-
-	public int getx(){ return this.x; }
-	public int gety(){ return this.y; }
+	public int getPosicion(){ return this.posicion; }
+	public int getAltitud(){ return this.altitud; }
 
 	public String getNick(){
-		return "x" + this.x + "y" + this.y;
+		return "x" + this.posicion + "y" + this.altitud;
 	}
 
-	public void preparar()
+	public void dibujar(Graphics g)
 	{
+		int x = 680 - (20 * this.posicion);
+		int y = 400 - (20 * this.altitud) - 20;
 		g.setColor(this.color);
-		g.fillRect(this.x,this.y,20,20);
+		g.fillRect(x, y, 20, 20);
+		g.setColor(Color.BLACK);
+		g.drawRect(x, y, 20, 20);
 	}
-
-	public Graphics getGraphicsObject()
+	public boolean esTuColor(Color koloro)
 	{
-		return this.g;
+		if (this.color.equals(koloro))
+			return true;
+		else
+			return false;
 	}
-
 }
