@@ -4,7 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 
-
+/**
+* Es la clase encargada de preparar la interfaz gráfica de usuario
+* y manejar los eventos que en ella sucedan
+*
+* @author Yavi OS
+*/
 public class Ventana extends JFrame implements Runnable
 {
 	Image img;
@@ -16,6 +21,9 @@ public class Ventana extends JFrame implements Runnable
 	int limite = lasX/2;
 	boolean cubosDentro = false;
 
+	/**
+	* Contructor de la clase
+	*/
 	public Ventana()
 	{
 		setTitle("Ores y que?");
@@ -24,6 +32,14 @@ public class Ventana extends JFrame implements Runnable
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	/**
+	* Método sobrecargado de la interfaz Runnable, que permite ejecutar
+	* algunas funciones en un Thread aparte. Dentro de este método esta
+	* un ciclo While para realizar los calculos de los gráficos del juego
+	* y luego llamar al método repaint()
+	*
+	* @see java.lang.Runnable
+	*/
 	public void run()
 	{
 		try
@@ -91,6 +107,11 @@ public class Ventana extends JFrame implements Runnable
 		g.drawImage(img, 0, 0, null);
 	}
 
+	/**
+	* Con este método dibujamos una plataforma en pantalla.
+	*
+	* @param g    Es un objecto de la clase Graphics para poder dibujar en pantalla
+	*/
 	public void dibujarPlataforma(Graphics g)
 	{
 		g.setColor(Color.GRAY);
@@ -99,6 +120,12 @@ public class Ventana extends JFrame implements Runnable
 		g.drawRect(limite, nivelPiso, 340, 50);
 	}
 
+	/**
+	* Este método dibuja una linea que servirá de limite para saber donde
+	* comenzarán a caer los cubitos
+	*
+	* @param g    Es un objecto de la clase Graphics para poder dibujar en pantalla
+	*/
 	public void dibujarLimite(Graphics g)
 	{
 		g.setColor(Color.DARK_GRAY);
@@ -106,6 +133,11 @@ public class Ventana extends JFrame implements Runnable
 			g.drawLine (this.limite, (400 - (i*23)), this.limite, (400 - (i*24)));
 	}
 
+	/**
+	* Este método crea un vector de objectos de la clase Box.
+	*
+	* @see Box
+	*/
 	public void prepararBoxes()
 	{
 		for (int j=0; j<10; j++)
@@ -117,6 +149,12 @@ public class Ventana extends JFrame implements Runnable
 		}
 	}
 
+	/**
+	* Con este método dibujamos en pantalla los cubos (cajas), la posición
+	* está fijada por los métodos internos de la clase Box.
+	*
+	* @param g    Es un objecto de la clase Graphics para poder dibujar en pantalla
+	*/
 	public void dibujarBoxes(Graphics g)
 	{
 		for (int i=0; i<boxes.size(); i++)
@@ -127,6 +165,11 @@ public class Ventana extends JFrame implements Runnable
 		}
 	}
 
+	/**
+	* Este método se encarga de agregar una nueva fila de cubos cada
+	* vez que todos los cubos avanzan un lugar hacia la izquierda.
+	*
+	*/
 	public void agregarFila()
 	{
 		for (int i=0; i<10; i++)
