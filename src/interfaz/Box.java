@@ -85,7 +85,7 @@ public class Box
 
 
 	/**
-	* Retorna el valor de la posicion de el objecto de la clase Box
+	* Retorna el valor de la posicion de el objeto de la clase Box
 	*
 	* @return Retorna un entero con el valor de la posición de derecha a izquierda
 	*/
@@ -94,7 +94,7 @@ public class Box
 
 
 	/**
-	* Retorna el valor de la altitud de el objecto de la clase Box
+	* Retorna el valor de la altitud de el objeto de la clase Box
 	*
 	* @return Retorna un entero con el valor de la altitud de abajo a arriba
 	*/
@@ -103,8 +103,19 @@ public class Box
 
 
 	/**
+	* Retorna el valor de la variable color de la clase Color.
+	*
+	* @return color 	Este es un objeto de la clase Color
+	*
+	* @see java.awt.Color
+	*/
+	public Color getColor(){ return this.color; }
+
+
+
+	/**
 	* Retorna el valor de la variable vivo, la cual denota si esta sobre la plataforma
-	* y de ser negativo, maneja el tiempo que el objecto Box puede permanecer vivo.
+	* y de ser negativo, maneja el tiempo que el objeto Box puede permanecer vivo.
 	*
 	* @return vivo es la variable booleana para conocer el estado de vida
 	*/
@@ -113,7 +124,7 @@ public class Box
 
 
 	/**
-	* Este método retorno un valor unico para cada objecto de la clase Box
+	* Este método retorno un valor unico para cada objeto de la clase Box
 	*
 	* @return String que contiene un valor unico por cubo, 
 	*		  al menos que dos de estos tengan la misma posición en el espacio
@@ -125,10 +136,21 @@ public class Box
 
 
 	/**
-	* Dibuja en un objecto de la clase Graphics el cubo, todo en su respectiva posición
+	* Cambia el valor boolean de la variable vivo, importante para poder eliminar el objecto
+	*
+	*/
+	public void matar()
+	{
+		this.vivo = false;
+	}
+
+
+
+	/**
+	* Dibuja en un objeto de la clase Graphics el cubo, todo en su respectiva posición
 	* en el espacio.
 	*
-	* @param g 		Es un objecto de la clase Graphics para poder dibujar en pantalla
+	* @param g 		Es un objeto de la clase Graphics para poder dibujar en pantalla
 	*
 	* @see java.awt.Graphics
 	*/
@@ -160,7 +182,7 @@ public class Box
 
 	/**
 	* Con este método podremos saber si un color es igual al que tiene
-	* un objecto de la clase Box.
+	* un objeto de la clase Box.
 	*
 	* @return boolean que define si es verdadero, siendo los colores iguales.
 	*		  o falso si no lo son.
@@ -201,7 +223,7 @@ public class Box
 
 
 	/**
-	* Con este método comprovaremos si ya el cubo no puede vivir más para ser eliminado
+	* Con este método comprobaremos si ya el cubo no puede vivir más para ser eliminado
 	* del programa. Cada vez que el cubo es dibujado comprueba si esta encima de la
 	* plataforma, de ser negativo comenzará a "morir".
 	* Este proceso lo realiza restando una unidad entera a la variable entera vidaSinOxigeno
@@ -218,6 +240,52 @@ public class Box
 			{
 				this.vivo = false;
 			}
+		}
+	}
+
+
+	/**
+	* Este método recibe una posición en pixele y devuelve true si esta dentro del area del cubo
+	*
+	* @param x 	Es la posición en el eje x en pixeles
+	* @param y 	Es la posición en el eje y en pixeles
+	*
+	*
+	* @return dentro es booleana y es true si los pixeles están dentro del area
+	*
+	*/
+	public boolean estaDentro(int x, int y)
+	{
+		int x1 = 680 - (20 * this.posicion) - 20;
+		int y1 = 400 - (20 * this.altitud) - 20;
+		int x2 = x1 + 20;
+		int y2 = y1 + 20;
+
+		/* Comprobamos los valores ^_^
+
+		System.out.println("El valor de x1:" + x1 + "\n"
+			+ "El valor de x2:" + x2 + "\n"
+			+ "El valor de y1:" + y1 + "\n"
+			+ "El valor de y2:" + y2 + "\n");
+		System.out.println("\n" + "Los valores entrantes son:" + "\n"
+			+ "x:" + x + "\n"
+			+ "y:" + y + "\n");
+
+		if ((x > x1 && x < x2) && (y > y1 && y < y2))
+		{
+			System.out.println("Dentro");
+		}else{
+			System.out.println("Fuera!");
+		}
+		System.exit(0);
+		*/
+	
+		// ahora a jugar con esto
+		if ((x > x1 && x < x2) && (y > y1 && y < y2))
+		{
+			return true;
+		}else{
+			return false;
 		}
 	}
 }

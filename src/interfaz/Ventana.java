@@ -20,6 +20,7 @@ public class Ventana extends JFrame implements Runnable
 	int nivelPiso = 400;
 	int limite = lasX/2;
 	boolean cubosDentro = false;
+	MouseHandler mhd = new MouseHandler();
 
 	/**
 	* Contructor de la clase
@@ -30,6 +31,7 @@ public class Ventana extends JFrame implements Runnable
 		setSize(lasX, lasY);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		addMouseListener(mhd);
 	}
 
 	/**
@@ -57,7 +59,7 @@ public class Ventana extends JFrame implements Runnable
 					for (int i=0; i<boxes.size(); i++)
 						((Box) boxes.get(i)).avanzar();
 					this.agregarFila();
-					System.out.println("Ciclo off");
+					System.err.println("Ciclo off");
 				}
 			}
 
@@ -71,7 +73,21 @@ public class Ventana extends JFrame implements Runnable
 
 	public void calculo()
 	{
-		
+		int x = mhd.getRatonX();
+		int y = mhd.getRatonY();
+
+		for (int i=0; i<boxes.size(); i++)
+		{
+			// comprovamos valores de verdad
+			if (x != 0 && y != 0)
+			{
+				// si son cero, no se ha dado click en añosssss
+				if ( ((Box) boxes.get(i)).estaDentro(x, y) )
+				{
+					((Box) boxes.get(i)).matar();
+				}
+			}
+		}
 	}
 
 	@Override
@@ -110,7 +126,7 @@ public class Ventana extends JFrame implements Runnable
 	/**
 	* Con este método dibujamos una plataforma en pantalla.
 	*
-	* @param g    Es un objecto de la clase Graphics para poder dibujar en pantalla
+	* @param g    Es un objeto de la clase Graphics para poder dibujar en pantalla
 	*/
 	public void dibujarPlataforma(Graphics g)
 	{
@@ -124,7 +140,7 @@ public class Ventana extends JFrame implements Runnable
 	* Este método dibuja una linea que servirá de limite para saber donde
 	* comenzarán a caer los cubitos
 	*
-	* @param g    Es un objecto de la clase Graphics para poder dibujar en pantalla
+	* @param g    Es un objeto de la clase Graphics para poder dibujar en pantalla
 	*/
 	public void dibujarLimite(Graphics g)
 	{
@@ -134,7 +150,7 @@ public class Ventana extends JFrame implements Runnable
 	}
 
 	/**
-	* Este método crea un vector de objectos de la clase Box.
+	* Este método crea un vector de objetos de la clase Box.
 	*
 	* @see Box
 	*/
@@ -153,7 +169,7 @@ public class Ventana extends JFrame implements Runnable
 	* Con este método dibujamos en pantalla los cubos (cajas), la posición
 	* está fijada por los métodos internos de la clase Box.
 	*
-	* @param g    Es un objecto de la clase Graphics para poder dibujar en pantalla
+	* @param g    Es un objeto de la clase Graphics para poder dibujar en pantalla
 	*/
 	public void dibujarBoxes(Graphics g)
 	{
@@ -167,7 +183,7 @@ public class Ventana extends JFrame implements Runnable
 			{
 				boxes.remove(i);
 			}
-			System.out.println("Hay box: " + boxes.size());
+			//System.out.println("Hay box: " + boxes.size());
 		}
 	}
 
