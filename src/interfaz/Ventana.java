@@ -84,7 +84,7 @@ public class Ventana extends JFrame implements Runnable
 				// si son cero, no se ha dado click en añosssss
 				if ( ((Box) boxes.get(i)).estaDentro(x, y) )
 				{
-					((Box) boxes.get(i)).matar();
+					((Box) boxes.get(i)).matar(false, i, this);
 				}
 			}
 		}

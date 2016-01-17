@@ -136,12 +136,23 @@ public class Box
 
 
 	/**
-	* Cambia el valor boolean de la variable vivo, importante para poder eliminar el objecto
+	* Cambia el valor boolean de la variable vivo, importante para poder eliminar el objecto.
+	* Este método permite a cada objeto Box eliminar a sus cercanos
 	*
+	* @param deUna 		es true si se trata de un objeto que no es el jefe y su misión es ser eliminado
+	* @param idBoss 	es el valor entero dentro del Vector de objetos Box para evitar
+	* 				 	una pronta eliminación del cubo encargado de eliminar a los demás
+	* @param selfie 	es un objeto de tipo Ventana útil para poder recorrer el Vector de Box's
 	*/
-	public void matar()
+	public void matar(boolean deUna, int idBoss, Ventana selfie)
 	{
-		this.vivo = false;
+		if (deUna)
+		{
+			this.vivo = false;
+			return;
+		}
+		// nos toca matar a todos los demás
+		// TODO: continuar con esto
 	}
 
 
