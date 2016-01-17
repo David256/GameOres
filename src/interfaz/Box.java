@@ -45,7 +45,7 @@ public class Box
 
 	public void dibujar(Graphics g)
 	{
-		int x = 680 - (20 * this.posicion);
+		int x = 680 - (20 * this.posicion) - 20;
 		int y = 400 - (20 * this.altitud) - 20;
 		g.setColor(this.color);
 		g.fillRect(x, y, 20, 20);
@@ -58,5 +58,10 @@ public class Box
 			return true;
 		else
 			return false;
+	}
+
+	public void avanzar()
+	{
+		this.posicion++;
 	}
 }

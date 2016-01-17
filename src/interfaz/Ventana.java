@@ -38,6 +38,9 @@ public class Ventana extends JFrame implements Runnable
 				if (ciclo > 230)
 				{
 					ciclo = 0;
+					for (int i=0; i<boxes.size(); i++)
+						((Box) boxes.get(i)).avanzar();
+					this.agregarFila();
 					System.out.println("Ciclo off");
 				}
 			}
@@ -95,9 +98,9 @@ public class Ventana extends JFrame implements Runnable
 
 	public void prepararBoxes()
 	{
-		for (int j=0; j<7; j++)
+		for (int j=0; j<10; j++)
 		{
-			for (int i=0; i<10; i++)
+			for (int i=0; i<7; i++)
 			{
 				boxes.add(new Box(i,j));
 			}
@@ -109,6 +112,14 @@ public class Ventana extends JFrame implements Runnable
 		for (int i=0; i<boxes.size(); i++)
 		{
 			((Box) boxes.get(i)).dibujar(g);
+		}
+	}
+
+	public void agregarFila()
+	{
+		for (int i=0; i<10; i++)
+		{
+			boxes.add(new Box(0, i));
 		}
 	}
 }
