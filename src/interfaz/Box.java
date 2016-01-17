@@ -9,6 +9,7 @@ public class Box
 	private final Color color;
 	private int posicion;
 	private int altitud;
+	private int limite;
 
 	public Box(int posicion, int altitud)
 	{
@@ -63,5 +64,16 @@ public class Box
 	public void avanzar()
 	{
 		this.posicion++;
+	}
+
+	public void setLimite(int limite)
+	{
+		this.limite = limite;
+	}
+
+	public void comprobarCaida()
+	{
+		if (this.limite == (680 - (this.posicion*20)))
+			System.out.println("nos caemos : " + this.getNick());
 	}
 }

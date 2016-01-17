@@ -35,7 +35,7 @@ public class Ventana extends JFrame implements Runnable
 				repaint();
 				Thread.sleep(100);
 				ciclo++;
-				if (ciclo > 230)
+				if (ciclo > 30) // el común es 230 ciclos
 				{
 					ciclo = 0;
 					for (int i=0; i<boxes.size(); i++)
@@ -79,6 +79,7 @@ public class Ventana extends JFrame implements Runnable
 		g2d.setColor(Color.RED);
 
 		this.dibujarPlataforma(gBuffer);
+		this.dibujarLimite(gBuffer);
 		if (!this.cubosDentro){
 			System.out.println("Iniciamos primera vez Box()");
 			this.prepararBoxes();
@@ -94,6 +95,13 @@ public class Ventana extends JFrame implements Runnable
 	{
 		g.setColor(Color.GRAY);
 		g.fillRect(limite, nivelPiso, 340, 50);
+	}
+
+	public void dibujarLimite(Graphics g)
+	{
+		g.setColor(Color.DARK_GRAY);
+		for (int i=0; i<10; i++)
+			g.drawLine (this.limite, (400 - (i*23)), this.limite, (400 - (i*24)));
 	}
 
 	public void prepararBoxes()
@@ -112,6 +120,8 @@ public class Ventana extends JFrame implements Runnable
 		for (int i=0; i<boxes.size(); i++)
 		{
 			((Box) boxes.get(i)).dibujar(g);
+			((Box) boxes.get(i)).setLimite(this.limite);
+			((Box) boxes.get(i)).comprobarCaida();
 		}
 	}
 
