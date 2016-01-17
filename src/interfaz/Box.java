@@ -58,8 +58,8 @@ public class Box
 		}
 		else
 		{
-			this.posicion += 1;
-			this.altitud -= 10;
+			this.posicion += (int)((new Random()).nextDouble() * 4) - 1;
+			this.altitud -= 5;
 			int x = 680 - (20 * this.posicion) - 20;
 			int y = 400 - (20 * this.altitud) - 20;
 			g.setColor(this.color);
@@ -90,6 +90,5 @@ public class Box
 	{
 		if (this.limite == (680 - (this.posicion*20)))
 			this.encima = false;
-
 	}
 }
