@@ -159,9 +159,15 @@ public class Ventana extends JFrame implements Runnable
 	{
 		for (int i=0; i<boxes.size(); i++)
 		{
+			((Box) boxes.get(i)).estaVivo();
 			((Box) boxes.get(i)).dibujar(g);
 			((Box) boxes.get(i)).setLimite(this.limite);
 			((Box) boxes.get(i)).comprobarCaida();
+			if (!((Box) boxes.get(i)).getVivo())
+			{
+				boxes.remove(i);
+			}
+			System.out.println("Hay box: " + boxes.size());
 		}
 	}
 

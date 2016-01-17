@@ -14,7 +14,9 @@ public class Box
 	private int posicion;
 	private int altitud;
 	private int limite;
+	private int vidaSinOxigeno = 50;
 	private boolean encima = true;
+	private boolean vivo = true;
 
 
 
@@ -97,6 +99,16 @@ public class Box
 	* @return Retorna un entero con el valor de la altitud de abajo a arriba
 	*/
 	public int getAltitud(){ return this.altitud; }
+
+
+
+	/**
+	* Retorna el valor de la variable vivo, la cual denota si esta sobre la plataforma
+	* y de ser negativo, maneja el tiempo que el objecto Box puede permanecer vivo.
+	*
+	* @return vivo es la variable booleana para conocer el estado de vida
+	*/
+	public boolean getVivo(){ return this.vivo; }
 
 
 
@@ -185,5 +197,27 @@ public class Box
 	{
 		if (this.limite == (680 - (this.posicion*20)))
 			this.encima = false;
+	}
+
+
+	/**
+	* Con este método comprovaremos si ya el cubo no puede vivir más para ser eliminado
+	* del programa. Cada vez que el cubo es dibujado comprueba si esta encima de la
+	* plataforma, de ser negativo comenzará a "morir".
+	* Este proceso lo realiza restando una unidad entera a la variable entera vidaSinOxigeno
+	* y cuando esta variable sea cero, se activará el estado de muerto: fijando la variable
+	* booleana vivo a false.
+	*
+	*/
+	public void estaVivo()
+	{
+		if (!this.encima)
+		{
+			this.vidaSinOxigeno--; // restamos una unidad
+			if (this.vidaSinOxigeno <= 0)
+			{
+				this.vivo = false;
+			}
+		}
 	}
 }
