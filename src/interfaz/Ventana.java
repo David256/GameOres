@@ -95,6 +95,8 @@ public class Ventana extends JFrame implements Runnable
 	{
 		g.setColor(Color.GRAY);
 		g.fillRect(limite, nivelPiso, 340, 50);
+		g.setColor(Color.BLACK);
+		g.drawRect(limite, nivelPiso, 340, 50);
 	}
 
 	public void dibujarLimite(Graphics g)
